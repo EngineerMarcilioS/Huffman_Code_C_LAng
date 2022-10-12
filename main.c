@@ -102,7 +102,7 @@ void inicializa_tabela_com_zero(unsigned int tab[]){
 
 void preenche_tab_frequencia(unsigned char texto[],unsigned int tab[]){
     int i=0;
-    printf("\nPreenchimento da tabela com a frequencia\n");
+    // printf("\nPreenchimento da tabela com a frequencia\n"); discoment this libe to show fill in table
     while(texto[i]!='\0'){
         tab[texto[i]]++;
         i++;
@@ -112,7 +112,7 @@ void preenche_tab_frequencia(unsigned char texto[],unsigned int tab[]){
     int i;
    printf("\tTABELA DE FREQUENCIA\n");
     for(i=0;i<TAM;i++){
-  	  if(tab[i]>0){//aqui
+  	  if(tab[i]>0){
         	printf("\t%d-%c = %u\n",i,i,tab[i]);
           }
     }
@@ -285,7 +285,7 @@ char* decodificar(unsigned char texto[],No *raiz){
 // ----------------- Parte 7 Compactar----------------------
 void compactar(unsigned char str[]){
 //Vai criar um arquivo binario para armazenar as informacoes codificadas
-    FILE *arquivo =fopen("compactado.mar","wb");
+    FILE *arquivo =fopen("compressed_file.txt","wb");
     int i=0,j=7; // j=7 devido ao numero da posicao dos bits do byte 00000000
     unsigned char mascara, byte=0; //        00000000 em binario
     //vai pegar o 00000001 e descolar 7vezes 10000000  1<<7
@@ -329,7 +329,7 @@ unsigned int eh_bit_um(unsigned char byte,int i){
 }
 
 void descompactar(No *raiz){
-    FILE *arquivo=fopen("compactado.mar","rb");
+    FILE *arquivo=fopen("compressed_file.txt","rb");
     No *aux=raiz;
     unsigned char byte;//10111101
     int i;
@@ -412,19 +412,19 @@ char *codificado, *decodificado;
 
 //Agora se torna necessario alocar memoria de forma dinamica
 tam=descobrir_tamanho();
-printf("\nQuantidade de caracteres incluindo espacos: %d\n",tam);
+printf("\nNumber of characters including spaces: %d\n",tam);
 
 texto=calloc(tam+2,sizeof(unsigned char));/*Agora temos memoria suficiente para ler todo o conteudo do arquivo texto.txt
 e salvar nesta regiao*/
 ler_texto(texto);
-printf("\nTexto: \n%s",texto);
+//printf("\nTexto: \n%s",texto);//aqui discoment this line to see the text that you type in the file
 
 
 //Inicialza a tabela de frequancia com zeros
 inicializa_tabela_com_zero(tabela_frequencia);
-printf("\n\nImpressao da string: %s",texto);
+//printf("\n\nImpressao da string: %s",texto);//aqui discoment this line to see the text that you type in the file//
 preenche_tab_frequencia(texto,tabela_frequencia);
-imprime_tab(tabela_frequencia);
+// imprime_tab(tabela_frequencia); discoment this line to show linked list
 
 
 
@@ -432,25 +432,25 @@ imprime_tab(tabela_frequencia);
 // ----------------- Parte 2 Lista encadeada ----------------------
         criar_lista(&lista);
         preencher_lista(tabela_frequencia,&lista);
-        imprimir_lista(&lista);
+        // imprimir_lista(&lista); discoment this line to show linked list
 
 // Part 3 Huffman Tree
 // ----------------- Parte 3 Arvore de Huffman ----------------------
 arvore=montar_arvore(&lista);
-printf("\n\tArvore de Huffman:\n");
-imprimir_arvore(arvore,0);
+//printf("\n\tArvore de Huffman:\n"); discomment this line to display Huffman tree
+//imprimir_arvore(arvore,0); discomment this line to display Huffman tree
 
 // Part 4 Dictionary
 // ----------------- Parte 4 Dicionario ----------------------
 colunas=altura_arvore(arvore)+1;// o +1 eh devido ao caracter fim de string '\0'
 dicionario=aloca_dicionario(colunas);
 gerar_dicionario(dicionario,arvore,"",colunas);//Como estamos na raiz devemos passar no caminho uma string vazia
-imprime_dicionario(dicionario);
+// imprime_dicionario(dicionario); discomment this line to display dictionary
 
 // Part 5 Codification
 // ----------------- Parte 5 Codificar----------------------
 codificado=codificar(dicionario,texto);
-printf("\n\tTexto codificado: %s\n",codificado);
+printf("\n\tBinary Encoded Text: %s\n",codificado);
 
 // Part 6 Decodifocation
 // ----------------- Parte 6 Decodificar----------------------
@@ -463,7 +463,7 @@ compactar(codificado);
 
 // Part 8 Descompactification
 // ----------------- Parte 8 Descompactar----------------------
-printf("\nARQUIVO DESCOMPACTADO!\n");
+printf("\nUNPACKED FILE:\n");
 
 descompactar(arvore);
 
