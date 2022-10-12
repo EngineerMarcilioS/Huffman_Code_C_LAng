@@ -285,7 +285,7 @@ char* decodificar(unsigned char texto[],No *raiz){
 // ----------------- Parte 7 Compactar----------------------
 void compactar(unsigned char str[]){
 //Vai criar um arquivo binario para armazenar as informacoes codificadas
-    FILE *arquivo =fopen("compressed_file.txt","wb");
+    FILE *arquivo =fopen("compressed_file.bin","wb");
     int i=0,j=7; // j=7 devido ao numero da posicao dos bits do byte 00000000
     unsigned char mascara, byte=0; //        00000000 em binario
     //vai pegar o 00000001 e descolar 7vezes 10000000  1<<7
@@ -329,7 +329,7 @@ unsigned int eh_bit_um(unsigned char byte,int i){
 }
 
 void descompactar(No *raiz){
-    FILE *arquivo=fopen("compressed_file.txt","rb");
+    FILE *arquivo=fopen("compressed_file.bin","rb");
     No *aux=raiz;
     unsigned char byte;//10111101
     int i;
