@@ -10,46 +10,49 @@
 // ----------------- Parte 1 Linked List ----------------------
 // ----------------- Parte 1 Lista encadeada ----------------------
 
+// Node data
 typedef struct no{
     unsigned char caracter;
     int frequencia;
     struct no *dir, *esq, *prox;
  }No;
 
+// List data
  typedef struct lista{
     No *inicio;
     int tam;
 
  }Lista;
 
+//Make list
  void criar_lista(Lista *lista){
     lista->inicio=NULL;
     lista->tam=0;
  }
 
- void inserir_ordenado(Lista *lista,No *no){//ordem crescente
+//Insert node ordered
+ void inserir_ordenado(Lista *lista,No *no){
      No *aux;
         // Is List empty?
     if(lista->inicio==NULL){
         lista->inicio=no;
-        //lista->tam++;
 
-    //O no que queremos inserir tem frequencia menor que inicio da lista
+    // Implementation Details //O no que queremos inserir tem frequencia menor que inicio da lista
     }else if(no->frequencia < lista->inicio->frequencia){// noh(freq 2) eh menor que  noh (freq 3)
         no->prox=lista->inicio;// noh(freq 2) prox->  noh (freq 3)
         lista->inicio=no; // lista inicio = noh
-        //lista->tam++;
     }else{
         aux=lista->inicio;
         while(aux->prox &&aux->prox->frequencia <= no->frequencia){
             aux=aux->prox;
         }no->prox=aux->prox;
         aux->prox=no;
-        //lista->tam++;
     }
     lista->tam++;
  }
 
+
+//Filled in list
 void preencher_lista(unsigned int tab[],Lista *lista){
     int i;
     No *novo;
@@ -73,6 +76,7 @@ void preencher_lista(unsigned int tab[],Lista *lista){
     }
 }
 
+// Print list
 void imprimir_lista(Lista *lista){
     No *aux=lista->inicio;
 
@@ -86,7 +90,7 @@ void imprimir_lista(Lista *lista){
 
 }
 
-
+// Part 1 frequency list
 // ----------------- Parte 1 Tabela de Frequencia ----------------------
 void inicializa_tabela_com_zero(unsigned int tab[]){
     int i;
@@ -108,12 +112,14 @@ void preenche_tab_frequencia(unsigned char texto[],unsigned int tab[]){
     int i;
    printf("\tTABELA DE FREQUENCIA\n");
     for(i=0;i<TAM;i++){
-    if(tab[i]>0){
-        printf("\t%d-%c = %u\n",i,i,tab[i]);
-        }
+  	  if(tab[i]>0){//aqui
+        	printf("\t%d-%c = %u\n",i,i,tab[i]);
+          }
     }
 
  }
+
+// Part 3 Huffman Tree
  // ----------------- Parte 3 Arvore de Huffman ----------------------
 No* remove_no_inicio(Lista *lista){
     No *aux=NULL;
@@ -166,6 +172,8 @@ void imprimir_arvore(No *raiz,int tam){
 
 }
 
+
+// Part 4 Dictionary
 // ----------------- Parte 4 Dicionario ----------------------
 int altura_arvore(No *raiz){
     int esq,dir;
@@ -226,6 +234,7 @@ void imprime_dicionario(char **dicionario){
 
 }
 
+// Part 5 Codification
 // ----------------- Parte 5 Codificar----------------------
 
 int calcula_tamanho_string(char **dicionario,unsigned char *texto){
@@ -245,6 +254,7 @@ char* codificar(char **dicionario,unsigned char *texto){
          }return codigo;
 }
 
+// Part 6 Decodification
 // ----------------- Parte 6 Decodificar----------------------
 char* decodificar(unsigned char texto[],No *raiz){
     int i=0;
@@ -271,6 +281,7 @@ char* decodificar(unsigned char texto[],No *raiz){
     }return decodificado;
 }
 
+// Part 7 Compactification
 // ----------------- Parte 7 Compactar----------------------
 void compactar(unsigned char str[]){
 //Vai criar um arquivo binario para armazenar as informacoes codificadas
@@ -307,6 +318,7 @@ void compactar(unsigned char str[]){
 
 }
 
+// Part 8 Descompactification
 // ----------------- Parte 8 Descompactar----------------------
 unsigned int eh_bit_um(unsigned char byte,int i){
     unsigned char mascara=(1<<i);// 0000001 com a operacao binaria se i for 7 desloca para esquerda 7 posicoes fica 10000000
@@ -348,7 +360,7 @@ void descompactar(No *raiz){
 }
 
 int descobrir_tamanho(){
-    FILE *arq=fopen("teste.txt","r");
+    FILE *arq=fopen("file.txt","r");
     //Queremos contar caracteres dentro de um arquivo
     int tam=0;
     if(arq){
@@ -364,7 +376,7 @@ int descobrir_tamanho(){
 }
 
 void ler_texto(unsigned char *texto){
-    FILE *arq=fopen("teste.txt","r");
+    FILE *arq=fopen("file.txt","r");
     char letra;
     int i=0;
     if(arq){
@@ -385,53 +397,11 @@ void ler_texto(unsigned char *texto){
 int main()
 {
 setlocale(LC_ALL,"Portuguese");
-//Fundamentos para construcao da tabela de fequencia
-//Imprime o numero correspoendente ao caracter V na tabela ASCII
-printf("Tabela ASCI dos caracteres\n");
-printf("%d",'V'); printf(" = %c \n",86);
-printf("%d",'a'); printf(" = %c \n",97);
-printf("%d",'m'); printf(" = %c \n",109);
-printf("%d",'o'); printf(" = %c \n",11);
-printf("%d",'s'); printf(" = %c \n",115);
 
-
-//printf("%Impressao do vetor: \n");
-
-int i, vet[TAM];
-unsigned char vet2[]="Vamos aprender Programação na linguagem C";
-
-for (i=0;i<TAM;i++){
-    vet[i]=0;
-}
-
-   vet['V']++;//O mesmo que vet[86]++
-   vet['a']++;
-   vet['m']++;
-   vet['o']++;
-   vet['s']++;
-
-
-printf("Impressao dos caracteres\n");
-for (i=0;i<TAM;i++){
-    printf("%d-%d ",i,vet[i]);
-}
-
-
-printf("\n\nImpressao do texto ou string com a codificacao na tabela ASCI: \n");
-printf("%s \n",vet2);
-
-for (i=0;i<TAM;i++){
-    if(vet2[i]>0)
-        printf("%d ",vet2[i]);
-
-}
-
-
+// Part 1 Frequency table
 // ----------------- Parte 1 Tabela de Frequencia ----------------------
 
-// Criacao da Tabela de Frenquencia para codigo Huffman
 
-//unsigned char texto[]="Vamos aprender a Programação em liguagem C";
 unsigned char *texto;
 unsigned int tabela_frequencia[TAM];
 Lista lista;
@@ -442,7 +412,7 @@ char *codificado, *decodificado;
 
 //Agora se torna necessario alocar memoria de forma dinamica
 tam=descobrir_tamanho();
-printf("\nQuantidade: %d\n",tam);
+printf("\nQuantidade de caracteres incluindo espacos: %d\n",tam);
 
 texto=calloc(tam+2,sizeof(unsigned char));/*Agora temos memoria suficiente para ler todo o conteudo do arquivo texto.txt
 e salvar nesta regiao*/
@@ -458,38 +428,45 @@ imprime_tab(tabela_frequencia);
 
 
 
-
+// Part 2 Linked List
 // ----------------- Parte 2 Lista encadeada ----------------------
         criar_lista(&lista);
         preencher_lista(tabela_frequencia,&lista);
         imprimir_lista(&lista);
 
+// Part 3 Huffman Tree
 // ----------------- Parte 3 Arvore de Huffman ----------------------
 arvore=montar_arvore(&lista);
 printf("\n\tArvore de Huffman:\n");
 imprimir_arvore(arvore,0);
 
+// Part 4 Dictionary
 // ----------------- Parte 4 Dicionario ----------------------
 colunas=altura_arvore(arvore)+1;// o +1 eh devido ao caracter fim de string '\0'
 dicionario=aloca_dicionario(colunas);
 gerar_dicionario(dicionario,arvore,"",colunas);//Como estamos na raiz devemos passar no caminho uma string vazia
 imprime_dicionario(dicionario);
 
+// Part 5 Codification
 // ----------------- Parte 5 Codificar----------------------
 codificado=codificar(dicionario,texto);
 printf("\n\tTexto codificado: %s\n",codificado);
 
+// Part 6 Decodifocation
 // ----------------- Parte 6 Decodificar----------------------
 decodificado=decodificar(codificado,arvore);
 //printf("\n\tTexto decodificado: %s\n",decodificado);
 
+// Part 7 Compactification
 // ----------------- Parte 7 Compactar-------------------------
 compactar(codificado);
 
+// Part 8 Descompactification
 // ----------------- Parte 8 Descompactar----------------------
 printf("\nARQUIVO DESCOMPACTADO!\n");
 
 descompactar(arvore);
+
 printf("\n\n");
 
 free(texto);//Para liberar a memoria que nao esta usando mais, Isso eh chamado na programacao de vazemento de memoria
