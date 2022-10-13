@@ -10,10 +10,10 @@ you will take as a result a reduction a binary file with size less than original
  
 
 Steps to use:
-1- You can change the main.c file in any text editor and save.
-2-You need to compile it, in this case run command gcc main.c
-3-Change the text inside the file.txt
-4-run command in cli: ./a.out "This is a binary generated after step 2.
+1- You can change the main.c file in any text editor and save.  
+2-You need to compile it, in this case run command gcc main.c  
+3-Change the text inside the file.txt  
+4-run command in cli: ./a.out "This is a binary generated after step 2.  
 5-A new file made in binary will be generated "compressed_file.bin" that contain data from file.txt, but less bits is 
 needed. 
 
