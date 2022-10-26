@@ -17,6 +17,8 @@ Steps to use:
 5-A new file made in binary will be generated "compressed_file.bin" that contain data from file.txt, but less bits is 
 needed. 
 
+## Links:
+[`Huffman Code`](https://github.com/EngineerMarcilioS/Huffman_Code_C_LAng)
 
 
 
