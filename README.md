@@ -18,7 +18,7 @@ Steps to use:
 needed. 
 
 ## Links:
-[`Huffman Code`](https://github.com/EngineerMarcilioS/Huffman_Code_C_LAng)
+[`Huffman Code`](https://engineermarcilios.github.io/Huffman_Code_C_LAng/)
 
 
 
